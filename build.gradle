@@ -1,20 +1,21 @@
 plugins {
-  // Main gradle plugin for building a Java library
-  id 'java-library'
-  // Support writing the extension in Groovy (remove this if you don't want to)
-  id 'groovy'
-  // To create a shadow/fat jar that bundle up all dependencies
-  id 'com.github.johnrengelman.shadow' version '7.1.2'
-  // Include this plugin to avoid downloading JavaCPP dependencies for all platforms
-  id 'org.bytedeco.gradle-javacpp-platform'
+    // Main gradle plugin for building a Java library
+    id 'java-library'
+    // Support writing the extension in Groovy (remove this if you don't want to)
+    id 'groovy'
+    // To create a shadow/fat jar that bundle up all dependencies
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    // Include this plugin to avoid downloading JavaCPP dependencies for all platforms
+    id 'org.bytedeco.gradle-javacpp-platform'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 // TODO: Change the module name
-ext.moduleName = 'io.github.qupath.extension.template'
+ext.moduleName = 'io.github.qupath.extension.appose'
 
 // TODO: Define the extension version & provide a short description
 version = "0.1.0-SNAPSHOT"
-description = 'A simple QuPath extension template'
+description = 'Shared memory between QuPath and python'
 
 // TODO: Specify the QuPath version, compatible with the extension.
 // The default 'gradle.ext.qupathVersion' reads this from settings.gradle.
@@ -22,7 +23,7 @@ ext.qupathVersion = gradle.ext.qupathVersion
 
 // TODO: Specify the Java version compatible with the extension
 // Generally 11 for QuPath v0.4.3, but will be 17 for QuPath v0.5.0
-ext.qupathJavaVersion = 11
+ext.qupathJavaVersion = 17
 
 /**
  * Define dependencies.
@@ -49,6 +50,7 @@ dependencies {
     // If you aren't using Groovy, this can be removed
     shadow libs.bundles.groovy
 
+    implementation 'org.apposed:appose:0.1.0'
     testImplementation "io.github.qupath:qupath-gui-fx:${qupathVersion}"
     testImplementation libs.junit
 }
